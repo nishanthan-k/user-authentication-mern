@@ -1,0 +1,40 @@
+.login {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: grey;
+  
+
+  .container {
+    width: 400px;
+    min-width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    input {
+      width: 80%;
+      height: 30px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      padding: 5px 10px;
+    }
+    
+    button {
+      width: 60%;
+      height: 40px;
+      border-radius: 5px;
+      border: none;
+      padding: 5px 10px;
+      font-size: 14px;
+      margin-top: 10px;
+      background-color: rgb(29, 114, 219);
+    }
+  }
+}
