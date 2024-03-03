@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "email": "nishanthan@gmail.com",
+      "password": "n@12345",
+      "name": "Nishanthan"
+    },
+    {
+      "email": "nishanthankarunakaran@gmail.com",
+      "password": "nishanthan@1234",
+      "name": "Nishanthan"
+    },
+    {
+      "email": "nishanthank@gmail.com",
+      "password": "123#ni",
+      "name": "Nishanthan"
+    },
+    {
+      "email": "nishanthandeveloper@gmail.com",
+      "password": "nisdev!9",
+      "name": "Nishanthan"
+    },
+    {
+      "email": "nishanthan.k@gmail.com",
+      "password": "nis@k123",
+      "name": "Nishanthan"
+    }
+  ]
+}
