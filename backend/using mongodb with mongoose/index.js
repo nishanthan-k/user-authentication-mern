@@ -7,7 +7,7 @@ const jwtPassword = "123456";
 
 const mongoose = require("mongoose");
 mongoose.connect(
-  "mongodb+srv://nishanthan:Shivayanama@owncluster.pgtbuvo.mongodb.net/usersdb?retryWrites=true&w=majority"
+  "mongodb+srv://username:password@owncluster.pgtbuvo.mongodb.net/usersdb?retryWrites=true&w=majority"
 );
 
 // db schema reference to mongoose
@@ -23,37 +23,36 @@ app.use(express.json());
 
 const userExists = async (email, password) => {
   try {
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({ email: email, password: password });
 
-    if (user) {
-      return true
-    }
-                                                                                                                                                
-    return false; // User not found
+    return !!user;
   } catch (error) {
-    console.error("Error while checking user:", error);
-    return false; // Return false in case of any errors
+    return res.json({
+      msg: "Error occured while checking if user exists or not",
+    });
   }
 };
 
 
-app.post("/signin", (req, res) => {
+app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
+  const response = await userExists(email, password);
 
-  console.log(userExists(email, password));
-  // if (!userExists(email, password)) {
-  //   return res.json({ msg: "Invalid User" });
-  // }
+  if (!response) {
+    return res.json({ msg: "User not found" });
+  }
 
-  // const token = jwt.sign({
-  //     user: email,
-  //     expiresAt: new Date().getTime() + 5400,
-  //   },
-  //   jwtPassword
-  // );
+  const token = jwt.sign(
+    {
+      user: email,
+      expiresAt: new Date().getTime() + 5400,
+    },
+    jwtPassword
+  );
 
-  // return res.json({token: token})
+  return res.json({ msg: "Signed in successfully", token: token });
 });
+
 
 app.post("/signup", async (req, res) => {
   const { email, password, name } = req.body;
@@ -70,14 +69,14 @@ app.post("/signup", async (req, res) => {
     name: name,
   });
 
-  // // save user record in db
+  // save user record in db
   user.save();
 
   return res.json({ msg: "New user created successfully" });
 });
 
-app.get("/", (req, res) => {
-  console.log("Get request gotten");
-});
+
+app.get("/", (req, res) => {});
+
 
 app.listen(PORT);
