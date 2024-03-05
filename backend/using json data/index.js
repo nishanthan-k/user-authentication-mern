@@ -21,7 +21,7 @@ const userExists = (email, password) => {
   return user ? true : false;
 };
 
-app.post("/login", (req, res) => {
+app.post("/signin", (req, res) => {
   const { email, password } = req.body;
 
   if (!userExists(email, password)) {
@@ -32,6 +32,8 @@ app.post("/login", (req, res) => {
 
   return res.json({ token: token });
 });
+
+
 
 app.get("/", (req, res) => {
   const token = req.headers.authorization;
